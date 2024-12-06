@@ -25,30 +25,37 @@ def find_direct(index,direct,map):
     direct_dict = {1:2,2:3,3:4,4:1}
     i = index[0]
     j = index[1]
+    mark_turn = False
     while True:
         if direct == 1 and map[i-1][j] == "#":
             direct = direct_dict[direct]
+            mark_turn = True
         if direct == 2 and map[i][j+1] == "#":
             direct = direct_dict[direct]
+            mark_turn = True
         if direct == 3 and map[i+1][j] == "#":
             direct = direct_dict[direct]
+            mark_turn = True
         if direct == 4 and map[i][j-1] == "#":
             direct = direct_dict[direct]
+            mark_turn = True
         else:
             break
-    return direct
+    return direct, mark_turn
 
 def move_a_step(index,direct,map):
     i = index[0]
     j = index[1]
     end_move = False
     if final_step_check(index,direct):
-        map_new = replace_char_at_index(map, i, j, "X")
         end_move = True
         direct_new = direct
         index_new = index
+        index_old = index
+        mark_turn = False
     else:
-        direct_new = find_direct(index,direct,map)
+        direct_new, mark_turn = find_direct(index,direct,map)
+        index_old = index
         if direct_new == 1:
             index_new = [i-1, j]
         if direct_new == 2:
@@ -57,19 +64,19 @@ def move_a_step(index,direct,map):
             index_new = [i+1, j]
         if direct_new == 4:
             index_new = [i, j-1]
-        map_new = replace_char_at_index(map, i, j, "X")
-    return index_new, direct_new, map_new, end_move
+    return index_new, direct_new, end_move, mark_turn, index_old
 
-def add_obstacle(map,i,j,index_start):
-    ob_added = False
-    if map[i][j] != "#" and [i,j] != index_start:
-        map_new = replace_char_at_index(map, i, j, "#")
-        ob_added = True
-    else:
-        map_new = map[:][:]
-    return map_new, ob_added
+def add_obstacle(map,i,j):
+    map_new = replace_char_at_index(map, i, j, "#")
+    return map_new
 
-file_path = "/Users/boxu/Dev/aoc 2024/example.txt"
+def check_list_in_set(list_name, set_name):
+    for sublist in set_name:
+        if list_name == sublist:
+            return True
+    return False
+
+file_path = "/Users/boxu/Dev/aoc 2024/day 6_input.txt"
 with open(file_path, 'r') as file:
     maxtrix = file.read()
 map = maxtrix.split("\n")
@@ -80,22 +87,50 @@ width_WE = len(map[0])
 for i, string in enumerate(map):
     if "^" in string:
         index_start = [i,string.index("^")]
-        direct_start = 1
+
+path = set()
+turn = set()
+
+end_move = False
+index = index_start[:]
+direct = 1
+while end_move == False:
+    index, direct, end_move, mark_turn, index_old = move_a_step(index,direct,map)
+    path.add(tuple(index))
+    if mark_turn:
+        turn.add(tuple(index_old))
+
+#print(path)
+#print(turn)
+#print(len(path))
+
+for index in path:
+    i = index[0]
+    j = index[1]
+    map = replace_char_at_index(map, i, j, "X")
+map_view = "\n".join(map)
+#print(map_view)
 
 success_spot = 0
-for i in range (0,width_NS):
-    for j in range (0, width_WE):
-        map_new, ob_added = add_obstacle(map,i,j,index_start)
-        if ob_added:
-            index = index_start[:]
-            direct = 1
-            end_move = False
-            step_count = 0
-            while end_move == False:
-                index, direct, map_new, end_move = move_a_step(index,direct,map_new)
-                step_count += 1
-                if step_count > 50:
-                    end_move = True
-                    success_spot += 1
+for ob_index in path:
+    i = ob_index[0]
+    j = ob_index[1]
+    if ob_index != index_start:
+        map_new = add_obstacle(map,i,j)
 
-print(success_spot)
+        turn = set()
+        end_move = False
+        index = index_start[:]
+        direct = 1
+        step_count = 0
+        while end_move == False:
+            index, direct, end_move, mark_turn,index_old = move_a_step(index,direct,map_new)
+            step_count += 1
+            index_str = ','.join(str(num) for num in index_old)
+            if mark_turn:
+                if index_str in turn:
+                    success_spot += 1
+                    end_move = True
+                else:
+                    turn.add(index_str)
+        print(ob_index,success_spot,step_count)
