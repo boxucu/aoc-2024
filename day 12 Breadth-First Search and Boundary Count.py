@@ -46,7 +46,6 @@ def find_region(x, y, map):
     region_set = set()
     border_set = {(x, y)}
     N_fence = 4
-    N_side = 4
     character = map[x][y]
 
     while True:
