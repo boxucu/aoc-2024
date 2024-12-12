@@ -74,7 +74,6 @@ def search_corners(region_set, map):
     D_y = [[0, -1], [0, 1], [0, -1], [0, 1]]
 
     for x, y in region_set:
-        # check -1,-1 direction
         for Dx, Dy in zip(D_x, D_y):
             has_corner = []
             for dx in Dx:
@@ -87,10 +86,13 @@ def search_corners(region_set, map):
                         has_corner.append(0)
             if sum(has_corner) == 1:
                 N_1_corner += 1
+                # 1/4 in region, contribute to 2*1/2 sides, will be count once during search
             elif sum(has_corner) == 3:
                 N_3_corner += 1
+                # 3/4 in region, contribute to 2*1/2 sides, will be count three-times during search
             elif has_corner == [0, 1, 1, 0] or has_corner == [1, 0, 0, 1]:
                 N_2_corner += 1
+                # 1/2 in region, but from "+" shaped corner, contribute to 4*1/2 sides, will be count twice during search
             N_side = N_1_corner + N_2_corner + int(N_3_corner / 3)
     print(len(region_set), N_side)
 
@@ -118,7 +120,7 @@ def search_map(map):
 
 
 def main():
-    file_path = "/Users/boxu/Dev/aoc 2024/example.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day 12_input.txt"
     with open(file_path, "r") as file:
         maxtrix = file.read()
     map = maxtrix.split("\n")
