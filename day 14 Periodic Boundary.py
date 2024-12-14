@@ -19,7 +19,7 @@ def create_robot_map(description, Nx, Ny, Ns):
     matches = re.findall(pattern, description)
 
     for match in matches:
-        x, y, vx, vy = map(int, match)
+        x, y, vx, vy = (int(x) for x in match)
         xNs, yNs = locate_robot(x, y, vx, vy, Nx, Ny, Ns)
         if (xNs, yNs) in robot_map:
             robot_map[(xNs, yNs)] += 1

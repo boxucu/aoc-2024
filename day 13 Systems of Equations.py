@@ -118,7 +118,7 @@ def main():
     N_token = 0
 
     for match in matches:
-        ax, ay, bx, by, px, py = map(int, match)
+        ax, ay, bx, by, px, py = (int(x) for x in match)
         #Na, Nb, solvable = solve_matrix(ax, ay, bx, by, px, py)
         Na, Nb, solvable = solve_matrix_corrected(ax, ay, bx, by, px, py)
         if solvable:
