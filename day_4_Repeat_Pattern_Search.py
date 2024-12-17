@@ -8,7 +8,7 @@ def xmas_search(map):
         xmas_count += len(matches2)
     return xmas_count
 
-file_path = "/Users/boxu/Dev/aoc 2024/day 4_input.txt"
+file_path = "/Users/boxu/Dev/aoc 2024/day_4_input.txt"
 with open(file_path, 'r') as file:
     maxtrix = file.read()
 

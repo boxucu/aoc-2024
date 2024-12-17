@@ -119,7 +119,7 @@ def search_map(map):
 
 
 def main():
-    file_path = "/Users/boxu/Dev/aoc 2024/day 12_input.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day_12_input.txt"
     with open(file_path, "r") as file:
         maxtrix = file.read()
     map = maxtrix.split("\n")

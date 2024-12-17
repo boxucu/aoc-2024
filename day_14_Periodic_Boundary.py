@@ -90,7 +90,7 @@ def map_polt(robot_map, Nx, Ny):
 
 
 def main_part1():
-    file_path = "/Users/boxu/Dev/aoc 2024/day 14_input.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day_14_input.txt"
     with open(file_path, "r") as file:
         description = file.read()
 
@@ -106,7 +106,7 @@ def main_part1():
 
 
 def main():
-    file_path = "/Users/boxu/Dev/aoc 2024/day 14_input.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day_14_input.txt"
     with open(file_path, "r") as file:
         description = file.read()
 

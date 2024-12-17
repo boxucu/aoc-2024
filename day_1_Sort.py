@@ -1,4 +1,4 @@
-file_path = "/Users/boxu/Dev/aoc 2024/day 1_input.txt"
+file_path = "/Users/boxu/Dev/aoc 2024/day_1_input.txt"
 colume_1 = []
 colume_2 = []
 with open(file_path, 'r') as file:

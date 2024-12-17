@@ -94,7 +94,7 @@ def find_trail(x0, y0, map):
 
 
 def main():
-    file_path = "/Users/boxu/Dev/aoc 2024/day 10_input.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day_10_input.txt"
     map = read_map_num(file_path)
     trailhead_set = find_trailhead(map)
     # print(trailhead_set)

@@ -19,7 +19,7 @@ def mul_2_num(nums_input):
     
     return mul
 
-file_path = "/Users/boxu/Dev/aoc 2024/day 3_input.txt"
+file_path = "/Users/boxu/Dev/aoc 2024/day_3_input.txt"
 with open(file_path, 'r') as file:
     memory = file.read()
 

@@ -1,11 +1,13 @@
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
 class Tile:
-    def __init__(self, i, j, direct, score, fromi, fromj):
-        self.i = i
-        self.j = j
-        self.direct = direct
-        self.score = score
-        self.fromi = fromi
-        self.fromj = fromj
+    i: int
+    j: int
+    direct: int
+    score: int
+    fromi: int
+    fromj: int
 
 
 # based on current tile (i, j, direct, score, fromi, fromj) give the set of possible next tiles
@@ -123,7 +125,7 @@ def trace_back(current_set, visited_set):
 
 
 def main():
-    file_path = "/Users/boxu/Dev/aoc 2024/day 16_input.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day_16_input.txt"
     with open(file_path, "r") as file:
         description = file.read()
     map = description.split("\n")

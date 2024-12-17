@@ -80,7 +80,7 @@ def find_res_nodes(freq_location, map):
 
 
 def main():
-    file_path = "/Users/boxu/Dev/aoc 2024/day 8_input.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day_8_input.txt"
     with open(file_path, "r") as file:
         maxtrix = file.read()
     map = maxtrix.split("\n")

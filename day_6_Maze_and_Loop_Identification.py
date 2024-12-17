@@ -76,7 +76,7 @@ def check_list_in_set(list_name, set_name):
             return True
     return False
 
-file_path = "/Users/boxu/Dev/aoc 2024/day 6_input.txt"
+file_path = "/Users/boxu/Dev/aoc 2024/day_6_input.txt"
 with open(file_path, 'r') as file:
     maxtrix = file.read()
 map = maxtrix.split("\n")

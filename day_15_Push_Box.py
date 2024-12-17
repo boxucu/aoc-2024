@@ -215,7 +215,7 @@ def GPS_sum(map, mark):
 
 
 def main():
-    file_path = "/Users/boxu/Dev/aoc 2024/day 15_input.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day_15_input.txt"
     with open(file_path, "r") as file:
         description = file.read()
 

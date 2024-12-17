@@ -1,7 +1,7 @@
 rule_book = {}
 manual_list = []
 
-file_path = "/Users/boxu/Dev/aoc 2024/day 5_input.txt"
+file_path = "/Users/boxu/Dev/aoc 2024/day_5_input.txt"
 with open(file_path, 'r') as file:
     for line in file:
         if line != "\n":

@@ -13,7 +13,7 @@ def line_check(line_data):
     
     return mark
     
-file_path = "/Users/boxu/Dev/aoc 2024/day 2_input.txt"
+file_path = "/Users/boxu/Dev/aoc 2024/day_2_input.txt"
 colume_mark = []
 with open(file_path, 'r') as file:
     for line in file:

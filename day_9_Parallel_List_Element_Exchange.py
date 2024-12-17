@@ -122,7 +122,7 @@ def checksum(map_id):
 
 
 def main():
-    file_path = "/Users/boxu/Dev/aoc 2024/day 9_input.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day_9_input.txt"
     with open(file_path, "r") as file:
         disk_map = file.read()
     map = [int(x) for x in disk_map]

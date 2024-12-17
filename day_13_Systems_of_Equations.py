@@ -105,7 +105,7 @@ def solve_matrix_corrected(ax, ay, bx, by, px, py):
 
 
 def main():
-    file_path = "/Users/boxu/Dev/aoc 2024/day 13_input.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day_13_input.txt"
     with open(file_path, "r") as file:
         description = file.read()
 

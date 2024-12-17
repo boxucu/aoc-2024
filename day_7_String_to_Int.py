@@ -57,7 +57,7 @@ def main():
     test_value = []
     num_equation = []
 
-    file_path = "/Users/boxu/Dev/aoc 2024/day 7_input.txt"
+    file_path = "/Users/boxu/Dev/aoc 2024/day_7_input.txt"
     with open(file_path, "r") as file:
         for line in file:
             a, b = line.split(":")
