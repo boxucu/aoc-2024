@@ -1,0 +1,90 @@
+def check_solvale(design, towel_patterns):
+    solvable = False
+    remaining_designs = {design}
+    while not solvable:
+        new_remaining_designs = set()
+        for remaining in remaining_designs:
+            for towel in towel_patterns:
+                if remaining.startswith(towel):
+                    new_remaining = remaining[len(towel) :]
+                    if len(new_remaining) == 0:
+                        solvable = True
+                    else:
+                        new_remaining_designs.add(new_remaining)
+                else:
+                    pass
+
+        remaining_designs = set()
+        remaining_designs = new_remaining_designs.copy()
+        if len(remaining_designs) == 0:
+            break
+
+    return solvable
+
+
+def find_matches(design, towel_patterns):
+    N_match = 0
+    # known the design must be solvable:
+    remaining_designs = {}
+    remaining_designs[design] = 1
+    while True:
+        new_remaining_designs = {}
+        for remaining in remaining_designs:
+            for towel in towel_patterns:
+                if remaining.startswith(towel):
+                    new_remaining = remaining[len(towel) :]
+                    if len(new_remaining) == 0:
+                        N_match += remaining_designs[remaining]
+                    elif new_remaining in new_remaining_designs:
+                        new_remaining_designs[new_remaining] += remaining_designs[
+                            remaining
+                        ]
+                    else:
+                        new_remaining_designs[new_remaining] = remaining_designs[
+                            remaining
+                        ]
+                else:
+                    pass
+
+        remaining_designs = {}
+        remaining_designs.update(new_remaining_designs)
+        if len(remaining_designs) == 0:
+            break
+
+    return N_match
+
+
+def main():
+    towel_patterns = set()
+    desired_designs = set()
+    file_path = "/Users/boxu/Dev/aoc 2024/day_19_input.txt"
+    with open(file_path, "r") as file:
+        for line in file:
+            if line != "\n":
+                if "," in line:
+                    towel_pattern = line.strip().split(", ")
+                    for pattern in towel_pattern:
+                        towel_patterns.add(pattern)
+                else:
+                    desired_designs.add(line.strip())
+    # print(len(towel_patterns))
+    # print(len(desired_designs))
+
+    solved = 0
+    total_match = 0
+    for design in desired_designs:
+        # solvable = check_solvale(design, towel_patterns)
+        # if solvable:
+        #     solved += 1
+        #     print([solved], "solved: ",design)
+
+        N_match = find_matches(design, towel_patterns)
+        if N_match > 0:
+            solved += 1
+            total_match += N_match
+
+    print([solved], "designs are solved with", [total_match], "matches")
+
+
+if __name__ == "__main__":
+    main()
