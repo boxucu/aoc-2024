@@ -248,57 +248,39 @@ def encode_part2(code):
 
 def create_trans_dict():
     # from direcitonal keyboard to direcitonal keyboard, the possible codes for one move is limited:
-    dk_list = "A^<v>"
-    possible_moves = set()
-    for chari in dk_list:
-        for charj in dk_list:
-            code = chari + charj
-            paths = dk_to_dk(code)
-            for path in paths:
-                str_list = path.split("A")
-                for str_element in str_list:
-                    possible_moves.add(str_element + "A")
-
-    next_layer_len_dict = {}
-    for move in possible_moves:
-        paths = dk_to_dk(move)
-        for path in paths:
-            next_layer_len = len(path)
-            break
-        next_layer_len_dict[move] = next_layer_len
-        # print((move,next_layer_len),paths)
+    move_2_next_move = {
+    (">^>A", "vA<^Av>A^A"),
+    (">>^A", "vAA<^A>A"),
+    ("<vA", "v<<A>A^>A"),
+    ("^<A", "<Av<A>>^A"),
+    ("v<<A", "<vA<AA>>^A"),
+    (">^A", "vA<^A>A"),
+    ("vA", "<vA^>A"),
+    (">>A", "vAA^A"),
+    ("^>A", "<Av>A^A"),
+    ("<A", "v<<A>>^A"),
+    ("<v<A", "v<<A>A<A>>^A"),
+    (">vA", "vA<A^>A"),
+    ("<<A", "v<<AA>>^A"),
+    ("v>A", "<vA>A^A"),
+    ("^A", "<A>A"),
+    ("A", "A"),
+    (">A", "vA^A"),
+    ("v<A", "<vA<A>>^A"),
+    ("<^A", "v<<A>^A>A"),
+    }
 
     next_layer_dict = {}
-    for move in possible_moves:
-        paths = dk_to_dk(move)
-        for path in paths:
-            code_split = path.split("A")
-            code_split.pop()
-            # print(path,code_split)
-            next_layer_len = 0
-            min_next_layer_len = 10**10
-            for str_element in code_split:
-                move_split = str_element + "A"
-                next_layer_len += next_layer_len_dict[move_split]
-
-            if next_layer_len < min_next_layer_len:
-                min_next_layer_len = next_layer_len
-                min_path = path
-
-            # print(move,path,next_layer_len)
-        # print(move,min_path,min_next_layer_len)
-        code_split = min_path.split("A")
+    for (move, next_move) in move_2_next_move:
+        code_split = next_move.split("A")
         code_split.pop()
-        # print(move,min_path,code_split)
         for str_element in code_split:
-            next_move = str_element + "A"
-            if (move, next_move) in next_layer_dict:
-                next_layer_dict[(move, next_move)] += 1
+            move2 = str_element + "A"
+            if (move, move2) in next_layer_dict:
+                next_layer_dict[(move, move2)] += 1
             else:
-                next_layer_dict[(move, next_move)] = 1
+                next_layer_dict[(move, move2)] = 1
 
-    # for (move, next_move) in next_layer_dict:
-    #     print(move, next_move,next_layer_dict[(move, next_move)])
     return next_layer_dict
 
 
@@ -336,7 +318,7 @@ def main():
             # print(code_2, code_2_dict)
 
             used_dk_layer = 2
-            while used_dk_layer < 3:
+            while used_dk_layer < 26:
                 # calculate one layer
                 code_3_dict = {}
                 for code_move in code_2_dict:
