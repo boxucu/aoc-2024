@@ -94,18 +94,13 @@ def main():
 
     # PART II
     longest_chain_len = 0
-    while True:
-        pc = pc_name_list[0]
-        pc_chain_list = find_longest_chain(pc, single_link_set, pc_name_list)
+    for index in range(0, len(pc_name_list)):
+        pc = pc_name_list[index]
+        pc_chain_list = find_longest_chain(pc, single_link_set, pc_name_list[index:])
         pc_chain = pc_chain_list[0]
         if len(pc_chain) > longest_chain_len:
             longest_chain_len = len(pc_chain)
             longest_chain = pc_chain
-
-        if len(pc_name_list) == 1:
-            break
-        else:
-            pc_name_list.pop(0)
 
     print(longest_chain)
 
